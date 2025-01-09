@@ -1,23 +1,6 @@
 #include "main.h"
 #include "lemlib/api.hpp"
 
-/**
- * A callback function for LLEMU's center button.
- *
- * When this callback is fired, it will toggle line 2 of the LCD text between
- * "I was pressed!" and nothing.
- */
-void on_center_button() {
-	static bool pressed = false;
-	pressed = !pressed;
-	if (pressed) {
-		pros::lcd::set_text(2, "I was pressed!");
-	} else {
-		pros::lcd::clear_line(2);
-	}
-}
-
-
 // left motor group
 pros::MotorGroup left_motor_group({-4, -5, -6}, pros::MotorGears::blue);
 // right motor group
@@ -136,11 +119,13 @@ void competition_initialize() {}
 void autonomous() 
 {
  
-    
-        chassis.turnToHeading(90, 4000);
-        left_motor_group.move(120);
-        right_motor_group.move(120);
-        chassis.moveToPoint(10,  10, 4000);
+        chassis.setPose(0,0,0);   
+        chassis.turnToHeading(45, 4000);
+        chassis.moveToPoint(10,  10, 4000); 
+        piston.set_value(true);
+
+        
+        
 }
 
 /**
